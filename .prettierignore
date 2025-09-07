@@ -1,0 +1,31 @@
+# Node.js
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Next.js build output
+.next
+out
+
+# Environment files
+.env
+.env.*  # ignore all env variants like .env.local, .env.production
+
+# Public folder (usually contains static assets)
+public/**/*
+
+# Build artifacts
+dist
+coverage
+*.log
+
+# Ignore compiled TypeScript files if any
+*.tsbuildinfo
+
+# Optional: ignore generated types from tRPC, Prisma, etc.
+**/generated/**
+**/__generated__/**
+
+# Ignore storybook files if using Storybook
+.storybo
