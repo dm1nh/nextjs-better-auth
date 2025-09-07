@@ -7,7 +7,11 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -16,8 +20,10 @@
     "@t3-oss/env-nextjs": "^0.13.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.44.5",
     "lucide-react": "^0.542.0",
     "next": "15.5.2",
+    "postgres": "^3.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
@@ -31,6 +37,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.2",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "prettier": "^3.6.2",
