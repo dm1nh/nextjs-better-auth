@@ -1,0 +1,9 @@
+{
+  "HomePage": {
+    "title": "Chào mừng đến với Next.js Better Auth"
+  },
+  "LocaleSwitcher": {
+    "label": "Ngôn ngữ",
+    "locale": "{locale, select, en {Tiếng Anh} vi {Tiếng Việt} other {Tiếng Việt}}"
+  }
+}
