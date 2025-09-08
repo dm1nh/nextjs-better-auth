@@ -35,7 +35,7 @@ export function LocaleSwitcherSelect({ children, defaultValue, label }: Props) {
 
   return (
     <Select onValueChange={onSelectChange} defaultValue={defaultValue} disabled={isPending}>
-      <SelectTrigger>
+      <SelectTrigger className="border-0 shadow-none">
         <SelectValue placeholder={label} />
       </SelectTrigger>
       <SelectContent>
