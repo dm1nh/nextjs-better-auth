@@ -7,6 +7,10 @@ export const env = createEnv({
     DATABASE_URL: z.url(),
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.url(),
+    MAIL_HOST: z.string(),
+    MAIL_PORT: z.number(),
+    MAIL_USER: z.email(),
+    MAIL_PASS: z.string(),
   },
   client: {
     NEXT_PUBLIC_BASE_URL: z.url(),
