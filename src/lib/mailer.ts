@@ -1,5 +1,5 @@
 import { env } from "@/env"
-import nodemailer from "nodemailer"
+import nodemailer, { type SendMailOptions } from "nodemailer"
 
 // Create a test account or replace with real credentials.
 const transporter = nodemailer.createTransport({
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 })
 
 const mailer = {
-  async send(params: Omit<Parameters<typeof transporter.sendMail>, "from">) {
+  async send(params: SendMailOptions) {
     const info = await transporter.sendMail({
       from: '"SEA" <sea@gmail.com>',
       ...params,
