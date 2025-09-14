@@ -88,4 +88,14 @@ export const authUseCase = {
       return handleError(error, "Failed to reset password")
     }
   },
+  async signOut() {
+    try {
+      const data = await auth.api.signOut({
+        headers: await headers(),
+      })
+      return generateResponse(data)
+    } catch (error) {
+      return handleError(error, "Cannot sign out")
+    }
+  },
 }

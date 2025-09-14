@@ -25,32 +25,30 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { signInWithEmail } from "@/lib/actions/auth.action/sign-in-with-email"
 import { signInWithProvider } from "@/lib/actions/auth.action/sign-in-with-provider"
-import {
-  signInWithEmailFormInputSchema,
-  type SignInWithEmailFormInput,
-} from "@/lib/schemas/auth.schema"
+import { signUp } from "@/lib/actions/auth.action/sign-up"
+import { signUpFormInputSchema, type SignUpFormInput } from "@/lib/schemas/auth.schema"
 
-export function SignInForm() {
+export function SignUpForm() {
   const [isPending, startTransition] = useTransition()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const form = useForm<SignInWithEmailFormInput>({
-    resolver: zodResolver(signInWithEmailFormInputSchema),
+  const form = useForm<SignUpFormInput>({
+    resolver: zodResolver(signUpFormInputSchema),
     values: {
       email: "",
+      name: "",
       password: "",
     },
   })
 
-  async function onSubmit(values: SignInWithEmailFormInput) {
+  async function onSubmit(values: SignUpFormInput) {
     startTransition(async () => {
-      const { data, error } = await signInWithEmail(values)
+      const { data, error } = await signUp(values)
       if (error || !data) {
         setErrorMessage(error?.message ?? "Invalid sign in process")
         return
       }
-      redirect({ href: "/", locale: "en" })
+      redirect({ href: "/sign-in", locale: "en" })
     })
   }
 
@@ -58,16 +56,14 @@ export function SignInForm() {
     const { data, error } = await signInWithProvider({ provider })
     if (error || !data) {
       setErrorMessage(error?.message ?? "Invalid OAuth")
-      return
     }
-    redirect({ href: "/", locale: "en" })
   }
 
   return (
     <Card className="w-[360px]">
       <CardHeader>
-        <CardTitle>Sign in to your account</CardTitle>
-        <CardDescription>Enter your email below to sign in to your account</CardDescription>
+        <CardTitle>Sign up your account</CardTitle>
+        <CardDescription>Enter your email and password to continue</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -87,19 +83,24 @@ export function SignInForm() {
             />
             <FormField
               control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center">
-                    <FormLabel>Password</FormLabel>
-                    <Link
-                      href="/forgot-password"
-                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                      tabIndex={-1}
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} />
                   </FormControl>
@@ -108,7 +109,7 @@ export function SignInForm() {
               )}
             />
             <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Loading..." : "Continue"}
+              Continue
             </Button>
             <Separator className="shrink" />
             <Button
@@ -129,9 +130,9 @@ export function SignInForm() {
       </CardContent>
       <CardFooter>
         <div className="text-muted-foreground w-full text-center">
-          Haven&apos;t an account?{" "}
-          <Link href="/sign-up" className="font-semibold underline-offset-4 hover:underline">
-            Sign up
+          Already have an account?{" "}
+          <Link href="/sign-in" className="font-semibold underline-offset-4 hover:underline">
+            Sign in
           </Link>
         </div>
       </CardFooter>
