@@ -1,6 +1,7 @@
 import { headers } from "next/headers"
 
 import { env } from "@/env"
+import { redirect } from "@/i18n/navigation"
 
 import { auth } from "@/lib/auth"
 import type {
@@ -21,7 +22,7 @@ export const authUseCase = {
         body: {
           ...input,
           rememberMe: true,
-          callbackURL: `${env.NEXT_PUBLIC_BASE_URL}/callback`,
+          callbackURL: `${env.BETTER_AUTH_URL}/callback`,
         },
         headers: await headers(),
       })
@@ -50,7 +51,7 @@ export const authUseCase = {
       const data = await auth.api.signUpEmail({
         body: {
           ...input,
-          callbackURL: `${env.NEXT_PUBLIC_BASE_URL}/callback`,
+          callbackURL: `${env.BETTER_AUTH_URL}/callback`,
         },
         headers: await headers(),
       })

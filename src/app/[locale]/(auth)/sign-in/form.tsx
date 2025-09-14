@@ -54,13 +54,13 @@ export function SignInForm() {
     })
   }
 
-  async function onSocialButtonClick(provider: "google") {
+  async function signInSocial(provider: "google") {
     const { data, error } = await signInWithProvider({ provider })
-    if (error || !data) {
+    if (error || !data?.url) {
       setErrorMessage(error?.message ?? "Invalid OAuth")
       return
     }
-    redirect({ href: "/", locale: "en" })
+    redirect({ href: data.url, locale: "en" })
   }
 
   return (
@@ -115,7 +115,7 @@ export function SignInForm() {
               type="button"
               variant="outline"
               className="w-full"
-              onClick={() => onSocialButtonClick("google")}
+              onClick={() => signInSocial("google")}
             >
               Continue with Google
             </Button>
